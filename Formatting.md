@@ -35,7 +35,7 @@ git add
 git commit
 ```
 
-[Docker section](docker/)
+[Docker section](lab/)
 
 - Day 0
 - Day 1
