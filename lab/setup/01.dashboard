@@ -1,0 +1,107 @@
+# LAB
+
+- [WSL Install](https://learn.microsoft.com/en-us/windows/wsl/install)
+- [WSL FAQ](https://learn.microsoft.com/en-us/windows/wsl/faq)
+- [Docker Install](https://docs.docker.com/desktop/windows/wsl/#download)
+- [Docker-WSL Integration](https://docs.docker.com/desktop/windows/wsl/)
+- [Kubernetes-WSL Integration](https://docs.docker.com/desktop/kubernetes/)
+- [Docker Rootless](https://docs.docker.com/engine/security/rootless/)
+- [WSL-vpn-kit (sakai135)](https://github.com/sakai135/wsl-vpnkit)
+
+
+## WSL
+
+WSL Install (Powershell)
+
+```Shell
+ps> wsl --list --online
+ps> wsl --install -d Ubuntu-20.04
+```
+```Shell
+ps> wsl -l -v
+Ubuntu-20.04  Running   2
+```
+
+## Docker
+
+Docker Setup
+```
+1. "Docker Desktop Installer.exe"
+2. Use WSL2 instead of Hyper-V
+3. Docker Desktop --> Dashboard -- > Settings -- > General
+   - "Use the WSL 2 based engine"
+   - "Expose daemon on tcp://localhost:2375 without TLS"
+4. Docker Desktop --> Dashboard --> Settings --> Resources --> WSL Integration
+   - Enable
+   - Ubuntu-20-04
+5. Docker Desktop --> Dashboard --> Settings --> Kubernetes
+   - Enable
+   - Show System Container
+6. Apply & Restart
+```
+
+Docker WSL Integration
+
+```Shell
+wls> docker version
+  Client: Docker Engine - Community
+  Cloud integration: v1.0.29
+  Version:           20.10.20
+ 
+ps> wsl -l -v
+* Ubuntu-20.04           Running         2
+  docker-desktop         Running         2
+  docker-desktop-data    Running         2
+```
+
+Kubernetes WSL Integration
+
+```Shell
+wls> kubectl version
+Client Version: version.Info{Major:"1", Minor:"25"
+wls> kubectl config get-contexts
+wls> kubectl config use-context docker-desktop
+wls> kubectl get nodes
+wls> kubectl get pod --all-namespaces
+```
+
+
+Rootless Docker
+
+```Shell
+wls> FORCE_ROOTLESS_INSTALL=1
+wls> curl -fsSL https://get.docker.com/rootless | sh
+wls> docker ps
+```
+
+## VPN and Internet access troubleshooting
+
+- [Download asset wsl-vpnkit.tar.gz](https://github.com/sakai135/wsl-vpnkit/releases/)
+- Move to $env:USERPROFILE
+- Import the image
+- Run the distribution
+- Activate VPN
+
+```Shell
+ps> wsl --import wsl-vpnkit --version 2 $env:USERPROFILE\wsl-vpnkit wsl-vpnkit.tar.gz
+ps> wsl -d wsl-vpnkit
+ps> wsl -d wsl-vpnkit --cd /app service wsl-vpnkit start
+wsl> curl google.com
+```
+- Check Internet Access
+
+```html
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="http://www.google.com/">here</A>.
+</BODY></HTML>
+```
+
+## Final
+
+Explore the Docker dashboard
+
+- Container
+- Images
