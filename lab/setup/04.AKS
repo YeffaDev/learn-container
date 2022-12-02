@@ -1,1 +1,21 @@
+# Referenced Resources
+
+- [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli)
+- [Azure CLI](https://portal.azure.com/#home)
+
+## AKS , copy line by line into the wsl to complete the AKS cluster
+
+Access the CLI shell from the web
+
+```azcli
+az login                                                                # Not needed from the web shell
+az account list | grep Avanade
+az account set --subscription "Visual Studio Avanade Account di Paolo"
+az group create --name "Kubernetes-Cloud" --location westeurope
+az aks get-versions --location westeurope -o table
+```
+
+
+### Create sample user,paste the content into the yaml file and save with "vi" command
+
 
