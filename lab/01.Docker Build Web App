@@ -1,1 +1,41 @@
+# Task 1 - Install dotnet pre-requisites
+
+- [dotnet 7.0](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004)
+
+```
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+sudo apt-get update
+sudo apt-get install -y aspnetcore-runtime-7.0
+```
+
+# Task 2 - Containerize the application
+
+- [dotnet 7.0](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-7.0)
+
+## Download the sample app
+
+```
+git clone https://github.com/dotnet/dotnet-docker
+```
+
+## Execute the dotnet application
+
+```
+cd ~/dotnet-docker/samples/aspnetapp/aspnetapp
+dotnet run
+```
+
+Web App is listening on http://localhost:5011
+
+```
+Building...
+warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+      No XML encryptor configured. Key {7f537284-4d68-438e-ba7c-bdd5fa14835d} may be persisted to storage in unencrypted form.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5011
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+```
 
