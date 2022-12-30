@@ -1,0 +1,27 @@
+# Namespaces
+
+## Task 1 - Get namespaces
+
+Inspect namespaces
+
+```
+kubectl get namespaces                            # Get a list of all the namespaces in our cluster
+kubectl get pods --namespace kube-system          # Get a list of the pods in the kube-system namespace
+kubectl api-resources --namespaced=true | head    # get a list of all the API resources and if they can be in a namespace
+kubectl get pods --all-namespaces                 # You can shorten --all-namespaces to -A
+kubectl get all --all-namespaces                  # Get all the resource across all of our namespaces
+kubectl create namespace playground1              # Imperatively create a namespace,lowecase only dash
+kubectl get namespaces                            # Get a list of all the current namespace
+```
+
+## Task 2 - Create namespaces
+
+Create namespace manifest
+kubectl apply -f namespace.yaml
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: playgroundinyaml
+```
