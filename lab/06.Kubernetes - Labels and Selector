@@ -1,15 +1,12 @@
-# Namespaces
+# Labels
 
-## Task 1 - Get namespaces
+## Task 1 - Create Pods with Labels
 
-Inspect namespaces
+Create a collection of pods with labels assinged to each
 
 ```
-kubectl get namespaces                            # Get a list of all the namespaces in our cluster
-kubectl get pods --namespace kube-system          # Get a list of the pods in the kube-system namespace
-kubectl api-resources --namespaced=true | head    # get a list of all the API resources and if they can be in a namespace
-kubectl get pods --all-namespaces                 # You can shorten --all-namespaces to -A
-kubectl get all --all-namespaces                  # Get all the resource across all of our namespaces
+vi CreatePodsWithLabels.yaml
+kubectl apply -f CreatePodsWithLabels.yaml
 ```
 
 ## Task 2 - Create namespaces imperatively 
