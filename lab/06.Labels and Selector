@@ -1,0 +1,104 @@
+# Namespaces
+
+## Task 1 - Get namespaces
+
+Inspect namespaces
+
+```
+kubectl get namespaces                            # Get a list of all the namespaces in our cluster
+kubectl get pods --namespace kube-system          # Get a list of the pods in the kube-system namespace
+kubectl api-resources --namespaced=true | head    # get a list of all the API resources and if they can be in a namespace
+kubectl get pods --all-namespaces                 # You can shorten --all-namespaces to -A
+kubectl get all --all-namespaces                  # Get all the resource across all of our namespaces
+```
+
+## Task 2 - Create namespaces imperatively 
+
+Create namespace imperatively 
+
+```
+kubectl create namespace playground1              # Imperatively create a namespace,lowecase only dash
+kubectl get namespaces                            # Get a list of all the current namespace
+```
+
+## Task 3 - Create namespaces declaration
+
+Create namespace manifest
+
+```
+kubectl apply -f namespace.yaml
+```
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: playgroundinyaml
+```
+
+## Task 4 - Create deployment in namespace
+
+### Create namespace manifest
+
+Create deploy in namespace playgroundinyaml
+
+```
+kubectl apply -f deployment.yaml
+```
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+  labels:
+    app: hello-world
+  namespace: playground1
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-world
+        image: gcr.io/google-samples/hello-app:1.0
+        ports:
+        - containerPort: 8080
+```
+
+### Create a pod in namespace imperatively
+
+```yaml
+kubectl run hello-world-pod \
+    --image=gcr.io/google-samples/hello-app:1.0 \
+    --namespace playground1
+```
+
+## Task 4 - Get pod into namespace
+
+```
+kubectl get pods
+kubectl get pods --namespace playground1  # You could use -n flag
+kubectl get all --namespace=playground1
+```
+
+## Task 5 - Delete pod into namespace
+
+```
+kubectl delete pods --all --namespace playground1 # delete all the pod, but the deployment will be recreated
+kubectl get pods -n playground1
+```
+
+## Task 6 - Cleanup
+
+```
+kubectl delete namespaces playground1       # delete namespace and ALL resources in the namespace
+kubectl delete namespaces playgroundinyaml  # delete namespace and ALL resources in the namespace
+kubectl get all
+kubectl get all --all-namespaces
+```
