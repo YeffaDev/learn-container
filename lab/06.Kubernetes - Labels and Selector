@@ -3,7 +3,7 @@
 ## Task 1 - Create Pods with Labels
 
 Create a collection of pods with labels assinged to each
-(CreatePodsWithLabels)[https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/06-CreatePodsWithLabels.yaml]
+[CreatePodsWithLabels](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/06-CreatePodsWithLabels.yaml)
 
 
 ```
