@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: demopod3
 spec:
-  RestartPolicy: Never
+  restartPolicy: Never
   containers:
   - name: democontainer
     image: busybox
