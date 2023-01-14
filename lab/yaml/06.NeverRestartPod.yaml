@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: demopod2
+  name: demopod3
 spec:
-  RestartPolicy: OnFailure
+  RestartPolicy: Never
   containers:
   - name: democontainer
     image: busybox
