@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demopod2
+spec:
+  RestartPolicy: OnFailure
+  containers:
+  - name: democontainer
+    image: busybox
+    command: ["sh", "-c","echo running pod && sleep 5 && exit 1"]
