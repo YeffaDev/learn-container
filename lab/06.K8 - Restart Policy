@@ -1,0 +1,31 @@
+# Restart Policy
+
+## Task 1 - Always Restart
+
+The policy restart the POD even if it exit succesfully with ReturnCode=0
+
+-- [AlwaysRestartPod.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/06.service.yaml)
+
+```
+vi AlwaysRestartPod.yaml
+kubectl get po --watch &
+kubectl apply -f AlwaysRestartPod.yaml      # The POD stay live for 5 sec, then is restarted
+fg
+ctrl+c
+kubectl describe pod demopod | grep Exit
+kubectl delete -f AlwaysRestartPod.yaml --force --grace-period=0
+```
+
+## Task 2 - Always Restart
+
+Create a collection of pods with labels assinged to each
+
+-- [OnFailureRestartPolicy.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/06.OnFailureRestartPolicy.yaml)
+
+```
+vi CreatePodsWithLabels.yaml
+kubectl apply -f CreatePodsWithLabels.yaml
+kubectl get pods --show-labels            #all label output
+kubectl get pods -L tier                  #particular label output
+kubectl describe pod nginx-pod-3 | head
+```
