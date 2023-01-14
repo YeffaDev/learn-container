@@ -6,7 +6,8 @@ Experiment with local kind cluster
 vi pod.yaml
 kubectl get events --watch &
 clear
-
+kubectl apply -f pod.yaml
+kubectl exec -it demo -- ps aux
 ```
 
 ## Task 1 - Create Pods with Labels
