@@ -6,4 +6,4 @@ spec:
   containers:
   - name: democontainer
     image: busybox
-    command: ["sh", "-c","echo running pod && sleep 10 && exit 1"]
+    command: ["sh", "-c","echo running pod && sleep 5 && exit 1"]
