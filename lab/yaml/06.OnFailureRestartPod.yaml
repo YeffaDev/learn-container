@@ -4,6 +4,7 @@ metadata:
   name: demopod2
 spec:
   containers:
+    restartPolicy: OnFailure
   - name: democontainer
     image: busybox
     command: ["sh", "-c","echo running pod && sleep 5 && exit 1"]
