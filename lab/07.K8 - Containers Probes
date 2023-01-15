@@ -1,20 +1,25 @@
-# Restart Policy
+# Containers Probes
 
-## Task 1 - Always Restart
+## Task 1 - Liveness probe
 
-The policy restart a terminating POD even if it exit succesfully with ReturnCode=0
+Define a liveness and readiness HTTP request that will fail
 
-- [AlwaysRestartPod.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/06/AlwaysRestartPod.yaml)
+- [containers-probe.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/07/containers-probe.yaml)
 
 ```
-vi AlwaysRestartPod.yaml
-kubectl get po --watch &
-kubectl apply -f AlwaysRestartPod.yaml      # The POD stay live for 5 sec, then exit succesfully
+vi containers-probe.yaml                   # The probes pont the the wrong container port
+kubectl get events --watch &               # The initialDelaySeconds field tells the kubelet that it should wait 10 seconds before performing the first probe.
+kubectl apply -f containers-probe.yaml     # The periodSeconds field specifies that the kubelet should perform a probe every 5 seconds.
 fg
-ctrl+c
-kubectl describe pod demopod1 | grep Exit
-kubectl delete -f AlwaysRestartPod.yaml --force --grace-period=0
+CTRL-C
+kubectl get pod                            # Restart is increasing
 ```
+
+- After 10 sec the POD is restarted by liveness probe
+- The POD is "not ready" because of readiness probe
+
+Fix the liveness and readiness probe [UP TO YOU]
+
 
 ## Task 2 - OnFailure Restart
 
