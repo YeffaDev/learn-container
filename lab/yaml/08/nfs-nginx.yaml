@@ -15,7 +15,7 @@ spec:
       volumes:
       - name: webcontent
         persistentVolumeClaim:
-          claimName: pvc-nfs-data
+          claimName: nfsdataclaim
       containers:
       - name: nginx
         image: nginx
