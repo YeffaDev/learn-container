@@ -61,17 +61,24 @@ k -n api-gtw-demo port-forward svc/api-gtw-demo 8080:80
 # install helm
 
 curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+
 sudo apt-get install apt-transport-https --yes
+
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+
 sudo apt-get update
+
 sudo apt-get install helm
+
 
 # install ingress via helm
 
 git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.0.0
+
 cd kubernetes-ingress/deployments/helm-chart
 
 helm repo add nginx-stable https://helm.nginx.com/stable
+
 helm repo update
 
 helm install nginxing nginx-stable/nginx-ingress --create-namespace --namespace nginx-ingress
