@@ -13,7 +13,7 @@ k create namespace project-tiger
 # Modifica namespace di default nel context
 k config set-context --current --namespace="project-tiger"
 
-# Check della modifica
+# Check del context
 k config get-contexts
 
 # Creazione di un nuovo deployment in yaml
@@ -47,40 +47,3 @@ k delete -f nginx-deploy-1.yaml
 
 # Eliminare service
 k delete svc/nginx-deploy-1
-
-#############################
-
-k apply -f time-app.yaml
-k apply -f hello-app.yaml
-k apply -f api-gtw-demo.yaml
-
-k -n api-gtw-demo port-forward svc/api-gtw-demo 8080:80
-
-#############################
-
-# install helm
-
-curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-
-sudo apt-get install apt-transport-https --yes
-
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-
-sudo apt-get update
-
-sudo apt-get install helm
-
-
-# install ingress via helm
-
-git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.0.0
-
-cd kubernetes-ingress/deployments/helm-chart
-
-helm repo add nginx-stable https://helm.nginx.com/stable
-
-helm repo update
-
-helm install nginxing nginx-stable/nginx-ingress --create-namespace --namespace nginx-ingress
-
-
