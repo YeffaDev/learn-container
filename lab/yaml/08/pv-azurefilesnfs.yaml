@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: NFS_NAME
+  name: nfsdata
   labels:
     type: nfs
 spec:
@@ -10,5 +10,5 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: NFS_INTERNAL_IP
-    path: NFS_EXPORT_FILE_PATH
+    server: aksmyst.file.core.windows.net
+    path: /aksmyst/export
