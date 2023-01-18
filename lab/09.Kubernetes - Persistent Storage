@@ -1,9 +1,8 @@
 # Persistent Storage
 
-## Task 1 - NFS export
+## Task 1 - Create NFS Persitent Volume
 
-Define a liveness and readiness HTTP request that will fail
-
+- [AzureFileShare Lab Setup)[https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/setup/05.AzureFileShareSetup.md]
 - [Azure File Share](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-quick-create-use-linux)
 - [Connecting AKS cluster to NFS Serve](https://learn.microsoft.com/en-us/azure/aks/azure-nfs-volume)
 
