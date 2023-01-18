@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: NFS_NAME
+  name: nfsdataclaim
 spec:
   accessModes:
     - ReadWriteMany
@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  selector: 
+  selector:
     matchLabels:
       type: nfs
