@@ -1,0 +1,12 @@
+# Persistent Storage
+
+## Task 1 - NFS export
+
+Define a liveness and readiness HTTP request that will fail
+
+- [Azure File Share](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-quick-create-use-linux)
+- [Connecting AKS cluster to NFS Serve](https://learn.microsoft.com/en-us/azure/aks/azure-nfs-volume)
+
+```
+
+```
