@@ -1,0 +1,51 @@
+# Azure FIle Share
+
+## Task 1 - NFS export
+
+Define a liveness and readiness HTTP request that will fail
+
+- [Azure File Share](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-quick-create-use-linux)
+
+
+```
+az login
+
+resourceGroupName="RG-aksmyst"
+region="westeurope"
+
+az group create \
+    --name $resourceGroupName \
+    --location $region \
+    --output none
+
+resourceGroupName="RG-aksmyst"
+storageAccountName="aksmyst$RANDOM"
+
+az storage account create \
+    --resource-group $resourceGroupName \
+    --name $storageAccountName \
+    --location $region \
+    --kind FileStorage \
+    --sku Premium_LRS \
+    --enable-large-file-share \
+    --output none
+ 
+shareName="export"
+
+az storage share-rm create \
+    --resource-group $resourceGroupName \
+    --storage-account $storageAccountName \
+    --name $shareName \
+    --quota 1024 \
+    --enabled-protocols NFS \
+    --output none
+ ```
+ 
+ ## Task 2 - Private Endpoint
+ 
+ - Enter the storage account and select FIle Shares
+ - Select "Export" file share and then "Configure Netwrok Security -- > Setup a private endpoint"
+ - Add Private Endpoint : RG = "RG-aksmyst" , Name="aksmystep" , Region=westeurope"
+ - Resource="file"
+ - Virtual Network="MC_RG-myAKS_myAKSCluster_westeurope", subnet ="aks_subnet", Dynamic IP
+ - Integrate with private DNS zone="Yes"
