@@ -1,17 +1,17 @@
 # Creazione cluster con 2 worker e 1 control plane
 
-vi cluster.yaml
-
 ```
+cat <<EOF >> kind-cluster.yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
 - role: worker
 - role: worker
+EOF
 ```
 
-kind create cluster --config cluster.yaml
+kind create cluster --config kind-cluster.yaml
 
 # Crea alias kubectl
 alias k=kubectl
