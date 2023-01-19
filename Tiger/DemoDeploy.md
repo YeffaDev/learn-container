@@ -38,7 +38,7 @@ k -n project-tiger run nginx-pod-1 --image=nginx
 k -n project-tiger run nginx-pod-1 --image=nginx $do > nginx-pod-1.yaml
 
 # Check pod creato
-k -n project-tiger get pod
+k -n project-tiger get pod -o wide
 
 k -n project-tiger describe pod
 
