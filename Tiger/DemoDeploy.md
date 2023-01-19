@@ -19,16 +19,17 @@ k config get-contexts
 # Creazione pod
 k -n project-tiger run nginx-pod-1 --image=nginx
 
+# Creazione pod tramite yaml
+k -n project-tiger run nginx-pod-1 --image=nginx $do > nginx-pod-1.yaml
+
 # Check pod creato
 k -n project-tiger get pod
 
 k -n project-tiger describe pod
 
-# Creazione pod tramite yaml
-k -n project-tiger run nginx-pod-1 --image=nginx $do > nginx-pod-1.yaml
+# Check log pod
 
-# Eliminare pod
-k -n project-tiger delete nginx-pod-1
+k -n project-tiger logs pod/nginx-pod-1
 
 # Creazione di un nuovo deployment in yaml
 k -n project-tiger create deployment --image=nginx nginx-deploy-1 $do 
@@ -61,6 +62,9 @@ k -n project-tiger get svc
 
 # Port-forward in localhost sulla porta 8080
 k -n project-tiger port-forward svc/nginx-deploy-1 8080:80
+
+# Eliminare pod
+k -n project-tiger delete nginx-pod-1
 
 # Eliminare deployment
 k -n project-tiger delete -f nginx-deploy-1.yaml
