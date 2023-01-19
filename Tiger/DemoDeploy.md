@@ -16,8 +16,18 @@ k config set-context --current --namespace="project-tiger"
 # Check del context
 k config get-contexts
 
+# Creazione pod
+k -n project-tiger run nginx-pod-1 --image=nginx
+
+# Creazione pod tramite yaml
+k -n project-tiger run nginx-pod-1 --image=nginx $do > nginx-pod-1.yaml
+
+# Eliminare pod
+k -n project-tiger delete nginx-pod-1
+
 # Creazione di un nuovo deployment in yaml
 k -n project-tiger create deployment --image=nginx nginx-deploy-1 $do 
+
 k -n project-tiger create deployment --image=nginx nginx-deploy-1 $do > nginx-deploy-1.yaml
 
 # Creazione deployment
@@ -30,20 +40,28 @@ k get all
 k -n project-tiger scale deployment nginx-deploy-1 --replicas=3
 
 # Check delle repliche
-k get pod --watch
-k get replicaset
+k -n project-tiger get pod --watch
+
+k -n project-tiger get replicaset
+
+# Riavvio deployment
+
+k -n project-tiger rollout restart deployment nginx-deploy-1 
 
 # Esposizione servizio sulla porta 80
-k expose deployment nginx-deploy-1 --type=NodePort --port=80 --target-port=80
+k -n project-tiger expose deployment nginx-deploy-1 --type=NodePort --port=80 --target-port=80
 
 # Check servizio
-k get svc
+k -n project-tiger get svc
 
 # Port-forward in localhost sulla porta 8080
-k port-forward svc/nginx-deploy-1 8080:80
+k -n project-tiger port-forward svc/nginx-deploy-1 8080:80
 
 # Eliminare deployment
-k delete -f nginx-deploy-1.yaml
+k -n project-tiger delete -f nginx-deploy-1.yaml
 
 # Eliminare service
-k delete svc/nginx-deploy-1
+k -n project-tiger delete svc/nginx-deploy-1
+
+# Eliminare namespace
+k delete ns project-tiger
