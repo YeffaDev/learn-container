@@ -19,6 +19,11 @@ k config get-contexts
 # Creazione pod
 k -n project-tiger run nginx-pod-1 --image=nginx
 
+# Check pod creato
+k -n project-tiger get pod
+
+k -n project-tiger describe pod
+
 # Creazione pod tramite yaml
 k -n project-tiger run nginx-pod-1 --image=nginx $do > nginx-pod-1.yaml
 
