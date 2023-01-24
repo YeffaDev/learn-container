@@ -1,0 +1,21 @@
+# Persistent Storage (Dynamic)
+
+Complete the AKS setup
+
+- [AKS Setup](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/setup/04.AKS.md)
+
+## Task 1 - Create Azure Storage Class
+
+- [AzureDisk.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/08/AzureDisk.yaml)
+
+### Create the PV
+
+```
+vi pv-azurefilesnfs.yaml
+kubectl apply -f pv-azurefilesnfs.yaml
+
+kubectl get PersistentVolume nfsdata      # Status = Available
+```
+
+
+```
