@@ -1,5 +1,4 @@
 # Creazione cluster con 2 worker e 1 control plane
-
 ```
 cat <<EOF >> kind-cluster.yaml
 kind: Cluster
@@ -14,40 +13,57 @@ EOF
 kind create cluster --config kind-cluster.yaml
 
 # Crea alias kubectl
+```
 alias k=kubectl
+```
 
 # Crea scorciatoia per creazione file yaml
 export do="--dry-run=client -o yaml"
 
 # Cancellaziome senza attesa
+```
 export now="--force --grace-period 0"
 k delete po envar-demo $now
+```
 
 # Check contexts
+```
 k config get-contexts
+```
 
 # Creazione nuovo namespace
+```
 k create namespace project-tiger
+```
 
 # Modifica namespace di default nel context
+```
 k config set-context --current --namespace="project-tiger"
+```
 
 # Check del context
+```
 k config get-contexts
+```
 
 # Creazione pod
+```
 k -n project-tiger run nginx-pod-1 --image=nginx
+```
 
 # Creazione pod tramite yaml
+```
 k -n project-tiger run nginx-pod-1 --image=nginx $do > nginx-pod-1.yaml
+```
 
 # Check pod creato
+```
 k -n project-tiger get pod -o wide
-
 k -n project-tiger describe pod
+```
 
 # Check log pod
-
+```
 k -n project-tiger logs pod/nginx-pod-1
 
 # Creazione di un nuovo deployment in yaml
@@ -93,3 +109,4 @@ k -n project-tiger delete svc/nginx-deploy-1
 
 # Eliminare namespace
 k delete ns project-tiger
+```
