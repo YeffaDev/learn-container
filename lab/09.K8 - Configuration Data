@@ -1,0 +1,71 @@
+# Environment Variables
+
+## Task 1 - Create the Environment Variables
+
+- [envvars.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/09/envvars.yaml)
+
+```
+vi envvars.yaml
+kubectl exec envar-demo -- printenv     # show the configuration variables ad system variables
+```
+
+### Available Azure classes
+
+```
+kubectl get StorageClass
+kubectl describe StorageClass default
+kubectl describe StorageClass managed-premium   #Reclaim policy is "delete"
+```
+
+### Create the Deploy with the PVC
+
+- [AzureDisk.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/08/AzureDisk.yaml)
+
+```
+vi AzureDisk.yaml
+kubectl apply -f AzureDisk.yaml
+kubectl get PersistentVolume
+kubectl get PersistentVolumeClaim
+kubectl get pods
+```
+
+### CleanUp
+
+```
+kubectl delete deployment nginx-azdisk-deployment
+kubectl delete PersistentVolumeClaim pvc-azure-managed
+kubectl get PersistentVolume
+```
+
+## Task 2 - Defining a custom StorageClass in Azure
+
+
+### Create the class definition with "Standard_SSD_LRS"
+
+- [CustomStorageClass.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/08/CustomStorageClass.yaml)
+
+```
+kubectl apply -f CustomStorageClass.yaml
+kubectl get StorageClass
+kubectl describe StorageClass managed-standard-ssd
+```
+
+### Use the custom class
+
+- [AzureDiskCustomStorageClass.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/08/AzureDiskCustomStorageClass.yaml)
+
+```
+kubectl apply -f AzureDiskCustomStorageClass.yaml
+kubectl get PersistentVolumeClaim
+kubectl get PersistentVolume
+```
+
+### CleanUp
+
+```
+kubectl delete deployment nginx-azdisk-deployment-standard-ssd
+kubectl delete PersistentVolumeClaim pvc-azure-standard-ssd
+kubectl get PersistentVolume --watch
+CTRL-C    #Released then terminating
+kubectl delete StorageClass managed-standard-ssd
+```
