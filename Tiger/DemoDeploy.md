@@ -20,7 +20,7 @@ alias k=kubectl
 # Crea scorciatoia per creazione file yaml
 export do="--dry-run=client -o yaml"
 
-# Cancellaziome senza attesa
+# Cancellazione senza attesa
 ```
 export now="--force --grace-period 0"
 k delete po envar-demo $now
