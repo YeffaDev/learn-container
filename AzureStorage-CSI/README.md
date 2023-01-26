@@ -93,7 +93,9 @@ kubectl get storageclass
 
 ### Create pvc 
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/azurefile-csi-driver/master/deploy/example/pvc-azurefile-csi.yaml
+kubectl apply \
+-f https://raw.githubusercontent.com/kubernetes-sigs/azurefile-csi-driver/master/deploy/example/pvc-azurefile-csi.yaml
+
 kubectl get pvc
 ```
 
