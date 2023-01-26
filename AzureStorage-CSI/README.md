@@ -1,3 +1,8 @@
+### Link
+https://learn.microsoft.com/en-us/azure/developer/terraform/create-k8s-cluster-with-tf-and-aks
+
+https://learn.microsoft.com/en-us/azure/aks/azure-files-csi
+
 ### Install Azure CLI
 
 ```
