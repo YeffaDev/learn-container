@@ -66,6 +66,21 @@ terraform plan -var-file="variables/core.tfvars"
 terraform apply -var-file="variables/core.tfvars" -auto-approve
 ```
 
+### Get kube_config and export into file
+```
+echo "$(terraform output kube_config)" > ./azurek8s
+```
+
+### Delete << EOT at the beginning and EOT at the end of the file
+```
+vi ./azurek8s
+```
+
+### Set an environment variable
+```
+export KUBECONFIG=./azurek8s
+```
+
 ### Check node
 ```
 kubectl get node
