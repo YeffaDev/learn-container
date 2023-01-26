@@ -101,7 +101,8 @@ kubectl get pvc
 
 ### Create a pod and attach a pvc
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/azurefile-csi-driver/master/deploy/example/nginx-pod-azurefile.yaml
+kubectl apply \
+-f https://raw.githubusercontent.com/kubernetes-sigs/azurefile-csi-driver/master/deploy/example/nginx-pod-azurefile.yaml
 ```
 
 ### Check volume mounted in a pod
