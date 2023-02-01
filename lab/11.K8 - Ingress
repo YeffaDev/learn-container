@@ -1,1 +1,35 @@
+# Restart Policy
 
+## Task 1 - Always Restart
+
+The policy restart a terminating POD even if it exit succesfully with ReturnCode=0
+
+- [ingress-single.yaml](https://github.com/YeffaDev/learn-kubernetes-brownbag/blob/master/lab/yaml/11/ingress-single.yaml)
+
+```
+kubectl apply -f \
+https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
+
+kubectl get services --namespace ingress-nginx
+kubectl get deploy --namespace ingress-nginx
+kubectl get pods --namespace ingress-nginx      #checkout the running controller POD
+
+kubectl describe ingressclasses nginx
+kubectl annotate ingressclasses nginx "ingressclass.kubernetes.io/is-default-class=true"
+
+kubectl create deployment hello-world-service-single --image=gcr.io/google-samples/hello-app:1.0
+kubectl scale deployment hello-world-service-single --replicas=2
+kubectl expose deployment hello-world-service-single --port=80 --target-port=8080 --type=ClusterIP
+
+vi ingress-single.yaml
+kubectl apply -f ingress-single.yaml
+
+kubectl get ingress                     #checkout "ingress-single" listening on port 80
+
+
+#Access the application via the exposed ingress on the public IP
+INGRESSIP=$(kubectl get ingress -o jsonpath='{ .items[].status.loadBalancer.ingress[].ip }')
+curl http://$INGRESSIP
+
+
+```
